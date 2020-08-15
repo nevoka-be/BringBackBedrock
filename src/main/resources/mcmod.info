@@ -1,0 +1,18 @@
+[
+  {
+    "modid": "bringbedrockback",
+    "name": "BringBedrockBack",
+    "description": "Restore bedrock after upgrading BedrockBGone",
+    "version": "1.12.2-0.0.1",
+    "mcversion": "1.12.2",
+    "url": "https://www.curseforge.com/members/jayjay1989be/projects",
+    "updateUrl": "",
+    "authorList": [
+      "JayJay1989BE"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
