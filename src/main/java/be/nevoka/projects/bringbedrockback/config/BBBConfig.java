@@ -18,18 +18,20 @@ import org.apache.logging.log4j.Level;
 @Mod.EventBusSubscriber(modid = BringBedrockBack.MOD_ID)
 public class BBBConfig {
     private static final String CATEGORY_GENERAL = "general";
+    @Config.Comment("Enable log output to console")
+    public static boolean enableLogOutput= false;
     @Config.Comment("Enable bedrock generation")
     public static boolean enableRegeneration = true;
     @Config.Comment("Y-level roofed bedrock. -1 to disable")
     public static int roofedBedrockLevel = 127;
     @Config.Comment("Y-level floored bedrock. -1 to disable")
     public static int flooredBedrockLevel = 0;
-    @Config.Comment("List of dimensions the roof needs to be regenerated")
-    public static int[] regenerateRoofedDimensions = new int[] {
+    @Config.Comment("List of dimensions the roof needs to be generated/regenerated")
+    public static int[] roofedDimensions = new int[] {
             DimensionType.NETHER.getId()
     };
-    @Config.Comment("List of dimensions the floor needs to be regenerated")
-    public static int[] regenerateFlooredDimensions = new int[] {
+    @Config.Comment("List of dimensions the floor needs to be generated/regenerated")
+    public static int[] flooredDimensions = new int[] {
             DimensionType.OVERWORLD.getId(),
             DimensionType.NETHER.getId()
     };
@@ -50,11 +52,13 @@ public class BBBConfig {
 
     private static void initGeneralConfig(Configuration cfg) {
         cfg.addCustomCategoryComment(CATEGORY_GENERAL, "General configuration");
+
+        enableLogOutput = cfg.getBoolean("enableLogOutput", CATEGORY_GENERAL, enableRegeneration, "Enable log output to console");
         enableRegeneration = cfg.getBoolean("enableRegeneration", CATEGORY_GENERAL, enableRegeneration, "Enable regeneration of bedrock layer");
         roofedBedrockLevel = cfg.getInt("roofedBedrockLevel", CATEGORY_GENERAL, roofedBedrockLevel, -1, 256, "Y-level of the roofed bedrock layer. -1 to disable");
         flooredBedrockLevel = cfg.getInt("flooredBedrockLevel", CATEGORY_GENERAL, flooredBedrockLevel, -1, 256, "Y-level of the floored bedrock layer. -1 to disabel");
-        regenerateFlooredDimensions = cfg.get("regenerateFlooredDimensions", CATEGORY_GENERAL, regenerateFlooredDimensions, "List of dimensions the floor bedrock needs to be regenerated").getIntList();
-        regenerateRoofedDimensions = cfg.get("regenerateRoofedDimensions", CATEGORY_GENERAL, regenerateRoofedDimensions, "List of dimensions the roof bedrock needs to be regenerated").getIntList();
+        flooredDimensions = cfg.get("regenerateFlooredDimensions", CATEGORY_GENERAL, flooredDimensions, "List of dimensions the floor bedrock needs to be generated/regenerated").getIntList();
+        roofedDimensions = cfg.get("regenerateRoofedDimensions", CATEGORY_GENERAL, roofedDimensions, "List of dimensions the roof bedrock needs to be generated/regenerated").getIntList();
     }
 
     @SubscribeEvent
