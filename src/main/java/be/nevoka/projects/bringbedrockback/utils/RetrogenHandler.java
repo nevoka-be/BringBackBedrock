@@ -25,12 +25,13 @@ public class RetrogenHandler {
         if (BBBConfig.enableRegeneration) {
             regenerateBedrockLayer(theChunk);
         }
+        System.out.println();
     }
 
     public static void regenerateBedrockLayer(Chunk chunk) {
         if (Arrays.stream(BBBConfig.flooredDimensions).anyMatch((e) -> e == chunk.getWorld().provider.getDimensionType().getId())){
             Random rnd = new Random();
-            if (!chunk.getBlockState(rnd.nextInt(16+1),0,rnd.nextInt(16+1)).equals(Blocks.BEDROCK)){
+            if (!chunk.getBlockState(rnd.nextInt(16),0,rnd.nextInt(16)).getBlock().equals(Blocks.BEDROCK)){
                 if(BBBConfig.enableLogOutput) BringBedrockBack.logger.info("Regenerate bedrock chunk at:" + chunk.getPos().toString());
                 for (int x = 0; x < 16; ++x) {
                     for (int z = 0; z < 16; ++z) {
