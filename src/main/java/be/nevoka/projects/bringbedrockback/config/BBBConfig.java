@@ -52,7 +52,6 @@ public class BBBConfig {
 
     private static void initGeneralConfig(Configuration cfg) {
         cfg.addCustomCategoryComment(CATEGORY_GENERAL, "General configuration");
-
         enableLogOutput = cfg.getBoolean("enableLogOutput", CATEGORY_GENERAL, enableRegeneration, "Enable log output to console");
         enableRegeneration = cfg.getBoolean("enableRegeneration", CATEGORY_GENERAL, enableRegeneration, "Enable regeneration of bedrock layer");
         roofedBedrockLevel = cfg.getInt("roofedBedrockLevel", CATEGORY_GENERAL, roofedBedrockLevel, -1, 256, "Y-level of the roofed bedrock layer. -1 to disable");

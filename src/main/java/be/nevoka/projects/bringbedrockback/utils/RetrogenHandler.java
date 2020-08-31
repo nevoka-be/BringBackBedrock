@@ -19,15 +19,22 @@ import java.util.Random;
 @Mod.EventBusSubscriber(modid = BringBedrockBack.MOD_ID)
 public class RetrogenHandler {
 
+    /**
+     * When a chunk is loaded
+     * @param event
+     */
     @SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
     public static void onEvent(ChunkEvent.Load event) {
         Chunk theChunk = event.getChunk();
         if (BBBConfig.enableRegeneration) {
             regenerateBedrockLayer(theChunk);
         }
-        System.out.println();
     }
 
+    /**
+     * Regenerate bedrock layer
+     * @param chunk the chunk to regenerate
+     */
     public static void regenerateBedrockLayer(Chunk chunk) {
         if (Arrays.stream(BBBConfig.flooredDimensions).anyMatch((e) -> e == chunk.getWorld().provider.getDimensionType().getId())){
             Random rnd = new Random();
