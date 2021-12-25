@@ -12,6 +12,7 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,14 +29,15 @@ public class ChunkLoadEvent {
 
     /**
      * Regenerate bedrock layer
-     *
      * @param chunk the chunk to regenerate
      */
     public static void regenerateBedrockLayer(LevelChunk chunk) {
-        GenerateBedrockCapability.getChunkStatus(chunk)
-                .ifPresent(chunkEnergy -> {
-                    if (!(chunkEnergy instanceof GenerateBedrock)) return;
-                    if (chunkEnergy.getStatus() == (byte) 0) {
+        GenerateBedrockCapability
+                .getChunkStatus(chunk)
+                .ifPresent(generateBedrock -> {
+                    if (!(generateBedrock instanceof GenerateBedrock)) return;
+                    if (!generateBedrock.getStatus()) {
+                        if(BBBConfig.Common.enableLogging.get()) logger.info("Generate bedrock for chunk " + chunk.getPos() + "");
                         if (BBBConfig.Common.containsInFloorFilter(chunk.getLevel().dimension().location())) {
                             BlockPos
                                     .betweenClosed(0, chunk.getLevel().getMinBuildHeight(), 0, 15, chunk.getLevel().getMinBuildHeight(), 15)
@@ -53,7 +55,9 @@ public class ChunkLoadEvent {
                                             chunk.setBlockState(blockPos, Blocks.BEDROCK.defaultBlockState(), false);
                                     });
                         }
-                        chunkEnergy.setStatus((byte) 1);
+
+                        generateBedrock.setStatus((byte) 1);
+                        chunk.setUnsaved(true);
                     }
                 });
     }

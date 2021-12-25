@@ -1,16 +1,21 @@
 package be.nevoka.projects.bringbackbedrock.config;
 
 import be.nevoka.projects.bringbackbedrock.BringBackBedrock;
+
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
+
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
+
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import javax.annotation.Nonnull;
+
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +24,7 @@ public class BBBConfig {
     public static class Common{
         public static ForgeConfigSpec.ConfigValue<List<? extends String>> flooredDimensions;
         public static ForgeConfigSpec.ConfigValue<List<? extends String>> roofedDimensions;
+        public static ForgeConfigSpec.BooleanValue enableLogging;
 
         private static final ForgeConfigSpec.Builder COMMON = new ForgeConfigSpec.Builder();
         public static final ForgeConfigSpec common_config;
@@ -37,9 +43,16 @@ public class BBBConfig {
             roofedDimensions = builder
                     .comment("A list of dimensions where there needs to be a bedrock roof")
                     .defineList("roofedDimensions", Common::getRoofedLevels, o -> o instanceof String);
+            enableLogging = builder
+                    .comment("Enable logging of the bedrock generation")
+                    .define("enableLogging", false);
             builder.pop();
         }
 
+        /**
+         * List that contains all default floored levels
+         * @return List of levels in string format
+         */
         private static List<String> getFlooredLevels(){
             return Lists.newArrayList(
                             Level.OVERWORLD,
@@ -51,6 +64,10 @@ public class BBBConfig {
                     .collect(Collectors.toList());
         }
 
+        /**
+         * List that contains all default roofed levels
+         * @return List of levels in string format
+         */
         private static List<String> getRoofedLevels(){
             return Lists.newArrayList(
                             Level.NETHER

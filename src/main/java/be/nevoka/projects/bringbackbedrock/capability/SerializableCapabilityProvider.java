@@ -1,8 +1,10 @@
 package be.nevoka.projects.bringbackbedrock.capability;
 
 import com.google.common.base.Preconditions;
+
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.Tag;
+
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
 

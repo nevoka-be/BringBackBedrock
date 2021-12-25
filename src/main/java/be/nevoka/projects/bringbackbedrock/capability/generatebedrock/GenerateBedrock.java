@@ -1,8 +1,10 @@
 package be.nevoka.projects.bringbackbedrock.capability.generatebedrock;
 
 import be.nevoka.projects.bringbackbedrock.api.capability.generatebedrock.IGenerateBedrock;
+
 import net.minecraft.nbt.ByteTag;
 import net.minecraft.nbt.Tag;
+
 import net.minecraftforge.common.util.INBTSerializable;
 
 public class GenerateBedrock implements IGenerateBedrock, INBTSerializable<Tag> {
@@ -18,8 +20,8 @@ public class GenerateBedrock implements IGenerateBedrock, INBTSerializable<Tag> 
     }
 
     @Override
-    public byte getStatus() {
-        return this.status;
+    public boolean getStatus() {
+        return this.status == (byte) 1;
     }
 
     @Override

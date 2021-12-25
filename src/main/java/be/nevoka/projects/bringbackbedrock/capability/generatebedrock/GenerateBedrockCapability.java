@@ -3,11 +3,13 @@ package be.nevoka.projects.bringbackbedrock.capability.generatebedrock;
 import be.nevoka.projects.bringbackbedrock.BringBackBedrock;
 import be.nevoka.projects.bringbackbedrock.api.capability.generatebedrock.IGenerateBedrock;
 import be.nevoka.projects.bringbackbedrock.capability.SerializableCapabilityProvider;
+
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.LevelChunk;
+
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
@@ -24,14 +26,29 @@ public class GenerateBedrockCapability {
     public static final byte DEFAULT_STATUS = 0;
     private static final ResourceLocation ID = new ResourceLocation(BringBackBedrock.MODID, "bedrock_status");
 
+    /**
+     * Register the capability
+     * @param event
+     */
     public static void register(final RegisterCapabilitiesEvent event) {
         event.register(IGenerateBedrock.class);
     }
 
+    /**
+     * Get the bedrock status of the chunk
+     * @param level the world
+     * @param chunkPos the position of the chunk
+     * @return
+     */
     public static LazyOptional<IGenerateBedrock> getChunkStatus(final Level level, final ChunkPos chunkPos) {
         return getChunkStatus(level.getChunk(chunkPos.x, chunkPos.z));
     }
 
+    /**
+     * Get the bedrock status of the chunk
+     * @param chunk The chunk
+     * @return
+     */
     public static LazyOptional<IGenerateBedrock> getChunkStatus(final LevelChunk chunk) {
         return chunk.getCapability(CHUNK_BEDROCK_STATUS_CAPABILITY, DEFAULT_FACING);
     }
