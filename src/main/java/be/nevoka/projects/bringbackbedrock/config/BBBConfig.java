@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class BBBConfig {
     public static class Common{
         public static ForgeConfigSpec.ConfigValue<List<? extends String>> flooredDimensions;
-        public static ForgeConfigSpec.ConfigValue<List<? extends String>> roofededDimensions;
+        public static ForgeConfigSpec.ConfigValue<List<? extends String>> roofedDimensions;
 
         private static final ForgeConfigSpec.Builder COMMON = new ForgeConfigSpec.Builder();
         public static final ForgeConfigSpec common_config;
@@ -34,9 +34,9 @@ public class BBBConfig {
             flooredDimensions = builder
                     .comment("A list of dimensions where there needs to be a bedrock floor")
                     .defineList("flooredDimensions", Common::getFlooredLevels, o -> o instanceof String);
-            roofededDimensions = builder
+            roofedDimensions = builder
                     .comment("A list of dimensions where there needs to be a bedrock roof")
-                    .defineList("roofededDimensions", Common::getRoofedLevels, o -> o instanceof String);
+                    .defineList("roofedDimensions", Common::getRoofedLevels, o -> o instanceof String);
             builder.pop();
         }
 
@@ -53,7 +53,6 @@ public class BBBConfig {
 
         private static List<String> getRoofedLevels(){
             return Lists.newArrayList(
-                            Level.OVERWORLD,
                             Level.NETHER
                     )
                     .stream()
@@ -78,7 +77,7 @@ public class BBBConfig {
 
         public static boolean containsInRoofFilter(@Nonnull ResourceLocation levelName) {
             Preconditions.checkNotNull(levelName, "String to parse must not be null");
-            return roofededDimensions.get().stream().anyMatch(s -> s.contains(levelName.toString()));
+            return roofedDimensions.get().stream().anyMatch(s -> s.contains(levelName.toString()));
         }
 
         public static boolean containsInFloorFilter(@Nonnull ResourceLocation levelName) {
