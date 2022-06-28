@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Specification-Title: bringbackbedrock
+Specification-Vendor: JayJay1989BE, Darkosto
+Specification-Version: 1
+Implementation-Title: BringBackBedrock
+Implementation-Version: 0.1.2
+Implementation-Vendor: bringbackbedrock
+Implementation-Timestamp: 2021-12-25T12:46:19+0100
+
