@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = 'https://maven.neoforged.net/releases' }
         maven { url = "https://sizableshrimp.me/maven" }
         maven { url = 'https://maven.parchmentmc.org' }
         mavenCentral()
@@ -16,7 +16,7 @@ apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '0.1.1'
+version = '0.1.2'
 group = 'be.nevoka.projects.bringbackbedrock'
 archivesBaseName = "${modid}-${mc_version}"
 
